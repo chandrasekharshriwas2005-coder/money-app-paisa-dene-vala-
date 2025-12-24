@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EARN MONEY</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:700,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css" />
+  <style>
+    body {
+      background: linear-gradient(152deg, #006460 0%, #08323e 85%, #134c25 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .earn-page-modal {
+      display: block !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- EARN Modal -->
+  <div id="earnModal" class="atm-modal earn-page-modal">
+    <div class="atm-modal-content">
+      <span class="close-atm" onclick="window.location.href='dashboard.html'">&times;</span>
+      <div class="atm-header">
+        <h2>EARN MONEY</h2>
+      </div>
+      <div class="money-fall-animation">
+        <div class="falling-money">💵</div>
+        <div class="falling-money">💸</div>
+        <div class="falling-money">💰</div>
+        <div class="falling-money">💴</div>
+        <div class="falling-money">💶</div>
+        <div class="falling-money">💷</div>
+      </div>
+      <div class="atm-offer-text">
+        <p class="animated-text">एक बार 300 दीजिए</p>
+        <p class="animated-text">हर रोज 500 पाइए</p>
+      </div>
+      <div class="qr-container">
+        <img id="earnQrCodeImage" src="" alt="QR Code" class="qr-code">
+      </div>
+      <div class="payment-link-container">
+        <a href="#" class="payment-link" onclick="handleEarnPayment(event)">
+          <span class="pay-link-text">Pay ₹300</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // UPI ID - User ko visible nahi hoga
+    var upiId = 'yourupi@paytm'; // YAHAN APNA UPI ID DALO
+    var payeeName = 'ATM CASHER';
+    var amount = '300';
+    
+    function generatePaymentLink() {
+      var phonepeLink = 'phonepe://pay?pa=' + encodeURIComponent(upiId) + '&pn=' + encodeURIComponent(payeeName) + '&am=' + amount + '&cu=INR&tn=ATM%20Payment';
+      return phonepeLink;
+    }
+    
+    function generateEarnQRCode() {
+      var paymentLink = generatePaymentLink();
+      var qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(paymentLink);
+      document.getElementById('earnQrCodeImage').src = qrUrl;
+    }
+    
+    function handleEarnPayment(event) {
+      event.preventDefault();
+      var phonepeLink = generatePaymentLink();
+      
+      window.location.href = phonepeLink;
+      
+      setTimeout(function() {
+        var upiLink = 'upi://pay?pa=' + encodeURIComponent(upiId) + '&pn=' + encodeURIComponent(payeeName) + '&am=' + amount + '&cu=INR&tn=EARN%20Payment';
+        window.location.href = upiLink;
+      }, 500);
+    }
+    
+    // Page load pe QR code generate karo
+    document.addEventListener('DOMContentLoaded', function() {
+      generateEarnQRCode();
+    });
+  </script>
+</body>
+</html>
+
