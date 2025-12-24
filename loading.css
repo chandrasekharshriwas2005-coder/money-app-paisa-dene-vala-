@@ -1,0 +1,211 @@
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #a8edea, #fed6e3, #fcb69f, #70e1f5);
+  overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+.bg-animation {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.rocket {
+  position: absolute;
+  bottom: 0;
+  left: 63%;
+  width: 60px;
+  height: 130px;
+  margin-left: -30px;
+  z-index: 2;
+  animation: rocket-up 4s linear infinite;
+  background: linear-gradient(135deg, #fff 55%, #706bf7 90%);
+  border-radius: 34px 34px 20px 20px/85px 85px 30px 30px;
+  border: 2px solid #8068db;
+  box-shadow: 0 6px 34px 0 #9c6cff33;
+  box-sizing: border-box;
+}
+.rocket:before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  width: 28px;
+  height: 28px;
+  background: #e3c5fd;
+  border-radius: 50%;
+  box-shadow: 0 1px 14px #b7a7e3;
+}
+.flame {
+  position: absolute;
+  left: 50%;
+  bottom: -38px;
+  width: 18px;
+  height: 38px;
+  margin-left: -9px;
+  background: radial-gradient(#ffd373 55%, #fa7721 90%, transparent);
+  border-radius: 50% 50% 80% 80%;
+  opacity: 0.72;
+  filter: blur(0.8px);
+  animation: flame-flicker 0.33s infinite alternate;
+}
+@keyframes rocket-up {
+  0% {bottom: -140px; opacity: 0.7;}
+  10% {opacity: 1;}
+  100% {bottom: 104vh; opacity:0;}
+}
+@keyframes flame-flicker {
+  0% {height: 33px; width: 18px;}
+  100% {height: 38px; width: 15px;}
+}
+.money {
+  position: absolute;
+  font-size: 2.1rem;
+  opacity: 0.74;
+  user-select: none;
+  pointer-events: none;
+  z-index: 1;
+  filter: blur(.2px) brightness(1.19);
+  animation: paise-ud 4s linear infinite;
+}
+.money1 {
+  left: 24vw; animation-delay: 0.4s;}
+.money2 {
+  left: 36vw; animation-delay: 0.9s;}
+.money3 {
+  left: 55vw; animation-delay: 1.6s;}
+.money4 {
+  left: 62vw; animation-delay: 2.8s;}
+.money5 {
+  left: 18vw; animation-delay: 2.0s;}
+.money6 {
+  left: 70vw; animation-delay: 1.3s;}
+@keyframes paise-ud {
+  0% {bottom:-40px; opacity:1;}
+  80% {opacity:0.85;}
+  100% {bottom:112vh; opacity:0;}
+}
+.loading-container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding-top: 36px;
+}
+.logo {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.logo-box {
+  background: #175d38;
+  color: #fff700;
+  border-radius: 26px 26px 12px 12px/30px 30px 10px 10px;
+  padding: 19px 32px 7px 32px;
+  box-shadow: 0 5px 14px 1px #08985933;
+  font-size: 2.3rem;
+  font-weight: bold;
+  letter-spacing: 0.14em;
+  display: flex;
+  justify-content: center;
+}
+.logo-abc {
+  color: #ffe15c;
+  text-shadow: 2px 2px 4px #8b9a05aa, 1px 1px 0 #11111130;
+  font-size: 2.54rem;
+}
+.logo-rummy {
+  color: #e3fff1;
+  letter-spacing: 0.14em;
+  font-size: 2.24rem;
+  margin-left: 0.7rem;
+}
+.logo-bar {
+  background: #1db65b;
+  color: #f1fff6;
+  border-radius: 0 0 13px 13px/0 0 15px 15px;
+  padding: 4px 14px 1px 14px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 2px;
+  letter-spacing: 0.04em;
+}
+.ganesha {
+  width: 185px;
+  height: 280px;
+  margin-top: 16px;
+  margin-bottom: 12px;
+  border-radius: 30px;
+  background: url('https://w0.peakpx.com/wallpaper/98/514/HD-wallpaper-ganapathi-smite-lord-ganesh-god-animation-ganpati-bappa-thumbnail.jpg') center bottom/cover no-repeat;
+  box-shadow: 0 4px 28px #22222266;
+  animation: float-ganesha 2.7s ease-in-out infinite alternate;
+}
+@keyframes float-ganesha {
+  0% { transform: translateY(0px) scale(1); }
+  60% { transform: translateY(-14px) scale(1.04); }
+  100% { transform: translateY(-20px) scale(1.06); }
+}
+.progress-bar-wrapper {
+  width: 90vw;
+  max-width: 370px;
+  margin-top: 14px;
+  margin-bottom: 8px;
+}
+.progress-bar-bg {
+  width: 100%;
+  background: #333c47;
+  border-radius: 14px;
+  height: 28px;
+  box-shadow: 0 2px 8px #00000020;
+  position: relative;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  background: linear-gradient(90deg, #15e415, #21cbbb, #ffd700, #42eb59);
+  height: 100%;
+  width: 0;
+  border-radius: 14px 0 0 14px;
+  transition: width 0.22s linear;
+  box-shadow: 0 0 12px 2px #40e81074;
+}
+.progress-text {
+  margin-top: -22px;
+  color: #fff;
+  font-size: 1.01rem;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 0 1px 6px #00000095, 0px 1px 1px #1e370d;
+}
+.loading-msg {
+  color: #edfff5;
+  font-size: 1.09rem;
+  margin-top: 4px;
+  text-align: center;
+  text-shadow: 1px 2px 5px #193e27b9;
+}
+@media (max-width: 450px) {
+  .loading-container {
+    padding-top: 0;
+  }
+  .logo-box {
+    font-size: 1.4rem;
+    padding: 13px 10px 5px 10px;
+  }
+  .ganesha {
+    width: 120px;
+    height: 182px;
+    margin-top: 6px;
+    margin-bottom: 10px;
+  }
+  .progress-bar-wrapper {
+    max-width: 92vw;
+  }
+}
