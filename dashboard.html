@@ -66,10 +66,75 @@
         <span class="jackpot-amt">1,643,386</span>
         <div class="download-btn"></div>
       </div>
-      <div class="game-card hot">
+      <div class="game-card hot atm-card" style="cursor:pointer;">
         <div class="game-icon"><img src="https://img.freepik.com/free-vector/hand-drawn-cartoon-business-woman-withdrawing-banknotes-atm_1308-132295.jpg?w=566&q=80" style="border-radius:12px;"></div>
         <span class="game-title">ATM CASHER</span>
-        <div class="download-btn"></div>
+        <div class="download-btn" onclick="event.stopPropagation();"></div>
+      </div>
+      <div class="game-card hot earn-card" style="cursor:pointer;">
+        <div class="game-icon"><img src="https://img.icons8.com/color/96/000000/money-bag.png"></div>
+        <span class="game-title">EARN</span>
+        <div class="download-btn" onclick="event.stopPropagation();"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ATM CASHER Modal -->
+  <div id="atmModal" class="atm-modal">
+    <div class="atm-modal-content">
+      <span class="close-atm" onclick="closeAtmModal()">&times;</span>
+      <div class="atm-header">
+        <h2>ATM CASHER</h2>
+      </div>
+      <div class="money-fall-animation">
+        <div class="falling-money">💵</div>
+        <div class="falling-money">💸</div>
+        <div class="falling-money">💰</div>
+        <div class="falling-money">💴</div>
+        <div class="falling-money">💶</div>
+        <div class="falling-money">💷</div>
+      </div>
+      <div class="atm-offer-text">
+        <p class="animated-text">एक बार 300 दीजिए</p>
+        <p class="animated-text">हर रोज 500 पाइए</p>
+      </div>
+      <div class="qr-container">
+        <img id="qrCodeImage" src="" alt="QR Code" class="qr-code">
+      </div>
+      <div class="payment-link-container">
+        <a href="#" class="payment-link" onclick="handlePhonePePayment(event)">
+          <span class="pay-link-text">Pay ₹300</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- EARN Modal -->
+  <div id="earnModal" class="atm-modal">
+    <div class="atm-modal-content">
+      <span class="close-atm" onclick="closeEarnModal()">&times;</span>
+      <div class="atm-header">
+        <h2>EARN MONEY</h2>
+      </div>
+      <div class="money-fall-animation">
+        <div class="falling-money">💵</div>
+        <div class="falling-money">💸</div>
+        <div class="falling-money">💰</div>
+        <div class="falling-money">💴</div>
+        <div class="falling-money">💶</div>
+        <div class="falling-money">💷</div>
+      </div>
+      <div class="atm-offer-text">
+        <p class="animated-text">एक बार 300 दीजिए</p>
+        <p class="animated-text">हर रोज 500 पाइए</p>
+      </div>
+      <div class="qr-container">
+        <img id="earnQrCodeImage" src="" alt="QR Code" class="qr-code">
+      </div>
+      <div class="payment-link-container">
+        <a href="#" class="payment-link" onclick="handleEarnPayment(event)">
+          <span class="pay-link-text">Pay ₹300</span>
+        </a>
       </div>
     </div>
   </div>
@@ -81,6 +146,120 @@
     <div class="nav-item"><img src="https://img.icons8.com/doodle/48/000000/share--v1.png"><br>Refer & Earn</div>
     <div class="nav-item"><img src="https://img.icons8.com/color/48/000000/activity-history.png"><br>Events</div>
   </div>
+
+  <script>
+    // UPI ID - User ko visible nahi hoga
+    var upiId = 'yourupi@paytm'; // YAHAN APNA UPI ID DALO
+    var payeeName = 'ATM CASHER';
+    var amount = '300';
+    
+    function generatePaymentLink() {
+      var phonepeLink = 'phonepe://pay?pa=' + encodeURIComponent(upiId) + '&pn=' + encodeURIComponent(payeeName) + '&am=' + amount + '&cu=INR&tn=ATM%20Payment';
+      return phonepeLink;
+    }
+    
+    function generateQRCode() {
+      var paymentLink = generatePaymentLink();
+      var qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(paymentLink);
+      document.getElementById('qrCodeImage').src = qrUrl;
+    }
+    
+    function openAtmModal() {
+      generateQRCode(); // QR code generate karo jab modal khule
+      var modal = document.getElementById('atmModal');
+      modal.style.display = 'block';
+      modal.classList.add('show');
+    }
+    
+    function closeAtmModal() {
+      var modal = document.getElementById('atmModal');
+      modal.style.display = 'none';
+      modal.classList.remove('show');
+    }
+    
+    function handlePhonePePayment(event) {
+      event.preventDefault();
+      var phonepeLink = generatePaymentLink();
+      
+      // Try to open PhonePe app
+      window.location.href = phonepeLink;
+      
+      // Fallback: If PhonePe not installed, try UPI link
+      setTimeout(function() {
+        var upiLink = 'upi://pay?pa=' + encodeURIComponent(upiId) + '&pn=' + encodeURIComponent(payeeName) + '&am=' + amount + '&cu=INR&tn=ATM%20Payment';
+        window.location.href = upiLink;
+      }, 500);
+    }
+    
+    // EARN Modal Functions
+    function generateEarnQRCode() {
+      var paymentLink = generatePaymentLink();
+      var qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(paymentLink);
+      document.getElementById('earnQrCodeImage').src = qrUrl;
+    }
+    
+    function openEarnModal() {
+      generateEarnQRCode();
+      var modal = document.getElementById('earnModal');
+      modal.style.display = 'block';
+      modal.classList.add('show');
+    }
+    
+    function closeEarnModal() {
+      var modal = document.getElementById('earnModal');
+      modal.style.display = 'none';
+      modal.classList.remove('show');
+    }
+    
+    function handleEarnPayment(event) {
+      event.preventDefault();
+      var phonepeLink = generatePaymentLink();
+      
+      window.location.href = phonepeLink;
+      
+      setTimeout(function() {
+        var upiLink = 'upi://pay?pa=' + encodeURIComponent(upiId) + '&pn=' + encodeURIComponent(payeeName) + '&am=' + amount + '&cu=INR&tn=EARN%20Payment';
+        window.location.href = upiLink;
+      }, 500);
+    }
+    
+    // ATM Card click event
+    document.addEventListener('DOMContentLoaded', function() {
+      var atmCard = document.querySelector('.atm-card');
+      if (atmCard) {
+        atmCard.addEventListener('click', function(e) {
+          // Agar download button pe click nahi hua, toh modal kholo
+          if (!e.target.closest('.download-btn')) {
+            openAtmModal();
+          }
+        });
+      }
+      
+      // EARN Card click event
+      var earnCard = document.querySelector('.earn-card');
+      if (earnCard) {
+        earnCard.addEventListener('click', function(e) {
+          if (!e.target.closest('.download-btn')) {
+            openEarnModal();
+          }
+        });
+      }
+    });
+    
+    window.onclick = function(event) {
+      var atmModal = document.getElementById('atmModal');
+      var earnModal = document.getElementById('earnModal');
+      if (event.target == atmModal) {
+        closeAtmModal();
+      }
+      if (event.target == earnModal) {
+        closeEarnModal();
+      }
+    }
+    
+    // Debug: Console me check karein
+    console.log('ATM Modal script loaded');
+  </script>
 </body>
 </html>
 

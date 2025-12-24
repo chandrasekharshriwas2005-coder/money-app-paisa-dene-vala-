@@ -3,17 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Colorful Login Page</title>
+  <title>Earn Money - Loading</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto:700,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="login.css" />
+  <link rel="stylesheet" href="loading.css" />
 </head>
 <body>
-  <!-- Animated Rocket & Money Section -->
   <div class="bg-animation">
     <div class="rocket">
       <div class="flame"></div>
     </div>
-    <!-- Money notes -->
     <div class="money money1">💸</div>
     <div class="money money2">💵</div>
     <div class="money money3">💶</div>
@@ -21,20 +19,23 @@
     <div class="money money5">💴</div>
     <div class="money money6">💰</div>
   </div>
-  <div class="login-wrapper">
-    <form class="login-form">
-      <h2>Welcome Back!</h2>
-      <div class="input-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required />
+  <div class="loading-container">
+    <div class="logo">
+      <div class="logo-box">
+        <span class="logo-abc">EARN</span><span class="logo-rummy">MONEY</span>
       </div>
-      <div class="input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required />
+      <div class="logo-bar">www.earnmoney.com</div>
+    </div>
+    <div class="ganesha"></div>
+    <div class="progress-bar-wrapper">
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill"></div>
       </div>
-      <button type="submit">Login</button>
-      <p class="forgot">Forgot your password?</p>
-    </form>
+      <div class="progress-text" id="progress-text">0% (0.00MB/2.72MB)</div>
+    </div>
+    <div class="loading-msg">The best slots machine in India</div>
   </div>
+  <script src="loading.js"></script>
 </body>
 </html>
+

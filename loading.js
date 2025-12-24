@@ -21,7 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
       progressBar.style.width = `100%`;
       progressText.textContent = `100% (${endMB.toFixed(2)}MB/${totalMB}MB)`;
       setTimeout(() => {
+        // Forcefully redirect - multiple methods
+        window.location.replace('dashboard.html');
         window.location.href = 'dashboard.html';
+        setTimeout(function() {
+          window.location.href = 'dashboard.html';
+        }, 100);
       }, 800); // Small delay to let progress bar fill
     }
   }
